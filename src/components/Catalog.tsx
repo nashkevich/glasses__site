@@ -71,7 +71,7 @@ function Catalog(){
         <>
         <div id="Art of YOGLASSES" className="section catalog">
         <div className="section-bg">
-            <svg viewBox="0 0 1442 719" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg preserveAspectRatio="none" height='100vh' viewBox="0 0 1442 719" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path id='line-bg' d="M-32 35.1953C177.071 2.05266 82.2971 668.925 401.147 693.314C719.412 717.658 622.707 85.9422 940.83 111.897C1201.38 133.154 1442 628.449 1442 628.449" stroke="#C4C4C4" stroke-width="68" stroke-linecap="round"/>
             </svg>
         </div>
