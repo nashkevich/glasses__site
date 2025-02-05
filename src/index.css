@@ -1,8 +1,10 @@
 html {
+    overflow: hidden;
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
   }
 body {
+    overflow-x: hidden;
     overflow-y: scroll;
     margin: 0;
     position: relative;
@@ -279,6 +281,27 @@ body {
 }
 
 @media (max-width: 800px){
+    .contact{
+        display: flex;
+    }
+    .contact-form{
+        flex:auto;
+        background-image: url('/Model.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        input, textarea{
+            background:rgba(0,0,0,0);
+            color: white;
+            border-bottom: 1px solid black;
+        }
+        input::placeholder, label{
+            color: white;
+        }
+    }
+    .img-contact{
+        display: none;
+    }
     .logo svg{
         width: 50px;
         height: 50px;
@@ -287,15 +310,24 @@ body {
         font-size: 32px;
     }
     .text-wrapper{
-        height: 60%;
+        height: 70%;
     }
     .welcome h3{
-        bottom: 25%;
+        font-size: 21px !important;
+        bottom: 15%;
     }
     h2{
         font-size: 32px !important;
     }
-    h3{
-        font-size: 21px !important;
+    .about-text{
+        word-wrap: break-word;
+        margin: 0 10px 0 10px;
+        font-size: 12px !important;
+    }
+}
+@media (max-width: 550px){
+    .card{
+        width: 200px;
+        height: 200px;
     }
 }
