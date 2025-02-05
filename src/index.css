@@ -54,7 +54,7 @@ body {
     color: white;
 }
 .img-welcome{
-    background-image: url('HERO.png');
+    background-image: url('/HERO.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -163,7 +163,7 @@ body {
     grid-template-columns: 50% 50%;
 }
 .img-contact{
-    background-image: url('Model.png');
+    background-image: url('/Model.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -275,4 +275,20 @@ body {
     gap: 20px;
     display: grid;
     grid-template-columns: auto auto auto;
+}
+
+@media (max-width: 800px){
+    .logo svg{
+        width: 50px;
+        height: 50px;
+    }
+    .section-name{
+        font-size: 32px;
+    }
+    h2{
+        font-size: 32px !important;
+    }
+    h3{
+        font-size: 21px !important;
+    }
 }
