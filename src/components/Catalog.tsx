@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 function Catalog(){
-    const productsStart = [{'img':'glasses_1.png','name':'Name','price':100},{'img':'glasses_2.png','name':'Name','price':100},{'img':'glasses_3.png','name':'Name','price':100}]
+    const [productsStart,setProductsStart] = useState([{'img':'glasses_1.png','name':'Name','price':100},{'img':'glasses_2.png','name':'Name','price':100},{'img':'glasses_3.png','name':'Name','price':100}])
     let [products,setProducts] = useState(productsStart)
     const [visibleContent,setVisibleContent] = useState(3)
     const updateVisibleContent = ()=>{
@@ -10,10 +10,9 @@ function Catalog(){
         setProducts((prevProducts)=>{
             return productsStart.slice(0,newVisibleContent)
         })
-        console.log(newVisibleContent)
     }
     function changeProductList(direction:number){
-        setProducts((prevProducts)=>{
+        setProductsStart((prevProducts)=>{
             if(prevProducts){
                 const newProducst = [...prevProducts]
                 let element = null
@@ -27,6 +26,7 @@ function Catalog(){
                 }else if(element && direction === -1){
                     newProducst.push(element)
                 }
+                setProducts(newProducst.slice(0,visibleContent))
                 return newProducst
             }
             return prevProducts
