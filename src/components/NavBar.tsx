@@ -1,18 +1,27 @@
-import { useEffect } from "react"
 interface NavBarProps{
     name: string;
 }
 function NavBar({name}:NavBarProps){
-    useEffect(()=>{
-        // const navBar = document.querySelector('.nav-wrapper') as HTMLElement
-        // window.addEventListener('wheel',(event)=>{
-        //     if(event.deltaY > 0 && navBar){
-        //         navBar.style.opacity  = '0'
-        //     }else{
-        //         navBar.style.opacity = '1'
-        //     }
-        // })
-    })
+    function scrollToSection(sectionName:string){
+        const section = document.querySelector(`.${sectionName}`)
+        if(section){
+            setTimeout(()=>{},100)
+            section.scrollIntoView({behavior:'smooth',block:"center"})
+        }
+    }
+    function openNavMenu(isOpen:boolean){
+        if(isOpen){
+            const iconNav = document.querySelector('.icon-nav') as HTMLElement
+            const navMenu = document.querySelector('.nav-menu') as HTMLElement
+            const closeIcon = document.querySelector('.close') as HTMLElement
+            if(iconNav){
+                iconNav.style.display = 'none'
+                navMenu.style.display = 'flex'
+                closeIcon.style.display = 'block'
+
+            }
+        }
+    }
     return (
         <div className="nav-wrapper">
             <span className="logo opacity-translate-anim"> 
@@ -22,7 +31,13 @@ function NavBar({name}:NavBarProps){
             </span>
             <h1 className="section-name">{name}</h1>
             <div className="icon-nav-container">
-                <span className="icon-nav opacity-translate-anim">
+                <div className="nav-menu">
+                    <h3 onClick={()=>{scrollToSection('catalog')}}>Catalog</h3>
+                    <h3 onClick={()=>{scrollToSection('about')}}>About</h3>
+                    <h3 onClick={()=>{scrollToSection('contact')}}>Contact</h3>
+                    <span className="close">X</span>
+                </div>
+                <span onClick={()=>{openNavMenu(false)}} className="icon-nav opacity-translate-anim">
                 <svg width="36" height="24" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="36" height="4" fill="#D9D9D9"/>
                 <rect y="10" width="36" height="4" fill="#D9D9D9"/>

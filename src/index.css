@@ -34,7 +34,6 @@ body {
         max-width: 36px;
         width: auto;
         position: relative;
-        display: block;
     }
 }
 .logo {
@@ -43,6 +42,18 @@ body {
 
 .icon-nav-container {
     margin-left: auto;
+}
+.nav-menu{
+    display: flex;
+    gap: 10px;
+    text-align: center;
+    align-items: center;
+    display: none;
+    color: white;
+    h3{
+        
+        text-decoration: underline;
+    }
 }
 .section{
     box-sizing: border-box;
