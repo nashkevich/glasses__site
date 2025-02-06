@@ -13,7 +13,7 @@ function App() {
     
     const options = {
         rootMargin:'0px',
-        threshold:0.1
+        threshold:0.4
         } 
     
     const callback:IntersectionObserverCallback = function(entries, observer){
