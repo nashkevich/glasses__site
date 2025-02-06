@@ -4,20 +4,22 @@ import WelcomePage from './components/WelcomePage'
 import Catalog from './components/Catalog'
 import About from './components/About'
 import Contact from './components/Contact'
-import { useEffect, useState,useRef } from 'react'
+import { useEffect, useState,createContext, useContext } from 'react'
 
+export const ScrollContext = createContext<[boolean, React.Dispatch<React.SetStateAction<boolean>>] | null>(null);
 
 function App() {
+  const [isScrollEnable, setScrollEnable] = useState(true)
   const[name,setName] = useState('YOGLASSES')
-  useEffect(()=>{
     const options = {
         rootMargin:'0px',
-        threshold:0.2
+        threshold:0.3
         } 
-    
     const callback:IntersectionObserverCallback = function(entries, observer){
+        
           entries.forEach((entry)=>{
-            if(entry.isIntersecting){
+            setScrollEnable((prev)=>{
+            if(entry.isIntersecting && prev){
               if(entry.target.id != 'contact'){
                 setName(entry.target.id)
               }else{
@@ -33,21 +35,26 @@ function App() {
                 },1000)
               }
             }
+            return prev
+            })
           })
       };
     var observer = new IntersectionObserver(callback,options)
-    var targets = document.querySelectorAll('.section')
+    useEffect(()=>{
+      var targets = document.querySelectorAll('.section')
     targets.forEach(target => observer.observe(target))
-  },[])
+    },[])
   return (
       <>
-        <NavBar name={name}></NavBar>
-        <div className='app'>
-          <WelcomePage></WelcomePage>
-          <Catalog></Catalog>
-          <About></About>
-          <Contact></Contact>
-        </div>
+        <ScrollContext.Provider value={[isScrollEnable,setScrollEnable]}>
+          <NavBar name={name}></NavBar>
+          <div className='app'>
+            <WelcomePage></WelcomePage>
+            <Catalog></Catalog>
+            <About></About>
+            <Contact></Contact>
+          </div>
+        </ScrollContext.Provider>
         </>
   )
 }

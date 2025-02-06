@@ -1,25 +1,38 @@
+import { useState, useContext } from "react";
+import { ScrollContext } from "../App";
+
 interface NavBarProps{
     name: string;
 }
 function NavBar({name}:NavBarProps){
+    const scrollContext = useContext(ScrollContext);
+    if (!scrollContext) {
+        throw new Error("ScrollContext must be used within a ScrollProvider");
+    }
+    const [isScroll,setIsScroll] = scrollContext;
     function scrollToSection(sectionName:string){
+        setIsScroll(false)
         const section = document.querySelector(`.${sectionName}`)
         if(section){
-            setTimeout(()=>{},100)
             section.scrollIntoView({behavior:'smooth',block:"center"})
+            
         }
+        setTimeout(()=>{
+            setIsScroll(true)
+        },1000)
     }
     function openNavMenu(isOpen:boolean){
+        const iconNav = document.querySelector('.icon-nav') as HTMLElement
+        const navMenu = document.querySelector('.nav-menu') as HTMLElement
+        const closeIcon = document.querySelector('.close') as HTMLElement
         if(isOpen){
-            const iconNav = document.querySelector('.icon-nav') as HTMLElement
-            const navMenu = document.querySelector('.nav-menu') as HTMLElement
-            const closeIcon = document.querySelector('.close') as HTMLElement
-            if(iconNav){
                 iconNav.style.display = 'none'
                 navMenu.style.display = 'flex'
                 closeIcon.style.display = 'block'
-
-            }
+        }else{
+            iconNav.style.display = 'block'
+            navMenu.style.display = 'none'
+            closeIcon.style.display = 'none'
         }
     }
     return (
@@ -35,9 +48,9 @@ function NavBar({name}:NavBarProps){
                     <h3 onClick={()=>{scrollToSection('catalog')}}>Catalog</h3>
                     <h3 onClick={()=>{scrollToSection('about')}}>About</h3>
                     <h3 onClick={()=>{scrollToSection('contact')}}>Contact</h3>
-                    <span className="close">X</span>
+                    <span onClick={()=>{openNavMenu(false)}} className="close">X</span>
                 </div>
-                <span onClick={()=>{openNavMenu(false)}} className="icon-nav opacity-translate-anim">
+                <span onClick={()=>{openNavMenu(true)}} className="icon-nav opacity-translate-anim">
                 <svg width="36" height="24" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="36" height="4" fill="#D9D9D9"/>
                 <rect y="10" width="36" height="4" fill="#D9D9D9"/>
